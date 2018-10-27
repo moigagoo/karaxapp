@@ -231,7 +231,7 @@ var content: kstring = ""
 
 proc renderTweetBox*(): VNode =
   buildHtml(tdiv):
-    textarea(onkeyup = (event: Event, this: VNode) => (content = this.value))
+    textarea(onkeyup = (event: Event, node: VNode) => (content = node.value))
 
     tdiv:
       span(text $content.len)
@@ -294,7 +294,7 @@ We also need to modify `renderTweetBox` proc to work with a local argument inste
 ```nim
 proc render*(tweetBox: var TweetBox): VNode =
   buildHtml(tdiv):
-    textarea(onkeyup = (event: Event, this: VNode) => (tweetBox.tweetText = this.value))
+    textarea(onkeyup = (event: Event, node: VNode) => (tweetBox.tweetText = node.value))
 
     tdiv:
       span(text $tweetBox.tweetText.len)
@@ -418,7 +418,7 @@ func initTweetBox*(): TweetBox =
 
 proc render*(tweetBox: var TweetBox): VNode =
   buildHtml(tdiv):
-    textarea(onkeyup = (event: Event, this: VNode) => (tweetBox.tweetText = this.value))
+    textarea(onkeyup = (event: Event, node: VNode) => (tweetBox.tweetText = node.value))
 
     renderCounter(tweetBox.tweetText.len)
 
@@ -439,7 +439,7 @@ proc renderTextarea*(onKeyUpProc: EventHandler): VNode =
     textarea(onkeyup = onKeyUpProc)
 ```
 
-> `EventHandler` is a shortcut for `(ev: Event, n: Node) -> void` conveniently defined by Karax.
+> `EventHandler` is a shortcut for `(Event, VNode) -> void` conveniently defined by Karax.
 
 In `src/component/button.nim`:
 
@@ -573,14 +573,14 @@ const maxTweetLength =
 
 proc render*(tweetBox: var TweetBox): VNode =
   buildHtml(tdiv):
-    renderTextarea(onKeyUpProc = (event: Event, this: VNode) => (tweetBox.tweetText = this.value))
+    renderTextarea(onKeyUpProc = (event: Event, node: VNode) => (tweetBox.tweetText = node.value))
 
     renderCounter(tweetBox.tweetText.len, maxTweetLength)
 
     renderButton(
       caption = "Submit",
       disabled = tweetBox.tweetText.len notin 1..maxTweetLength,
-      onClickProc = (event: Event, this: VNode) => (echo "Send tweet: " & tweetBox.tweetText)
+      onClickProc = () => (echo "Send tweet: " & tweetBox.tweetText)
     )
 ```
 
@@ -601,4 +601,4 @@ Second, there's no built-in type that incapsulates both kinds of allowed callbac
 
 Nonetheless, creating webapps with Karax turned out to be very pleasant, as Nim programming in general.
 
-*[Download the sample app code from GitHub]()*
+*[Download the sample app code from GitHub](https://github.com/moigagoo/karaxapp)*
