@@ -1,6 +1,6 @@
 # Exploring Karax
 
-Hi, my name is Constantine, I'm a manager and a hobbyist programmer. I've been programming in Python for some ten years, but for the last couple of years Nim has become my new love.
+I've been programming in Python for some ten years, but for the last couple of years Nim has become my new love.
 
 In this short post I'm discovering Nim as a frontend language by exploring [Karax framework](https://github.com/pragmagic/karax). Note that I'm not a frontend developer and am pretty scared of the concepts those guys deal with. This is a journey for me as much as it is for you.
 
