@@ -595,9 +595,9 @@ We've seen how a Karax app can be split into components with and without state. 
 
 However, there are a few things that bug me and for which I don't know a solution yet.
 
-First, our render procs mutate the state. As the name implies, they should only render the state. Ideally, I want render `proc`s be replaced with `func`s.
+First, our render procs mutate the state. As the name implies, they should only render the state. Ideally, I want render `proc`s be replaced with `func`s. There's an alternative, [Elm-inspired approach](https://gist.github.com/honewatson/d60cf89804607dbeb652841b484441dc) that promises immutable model, but in fact you can't make the render proc into a func with it as well.
 
-Second, there's no built-in type that incapsulates both kinds of allowed callback procs: `() -> void` and `(Event, VNode) -> void`. It would be nice to have this type to set as type for arguments like `onClickProc` and `OnKeuUpProc`. Currently, we have to pick the first of the second one depending on the component's content.
+Second, there's no built-in type that incapsulates both kinds of allowed callback procs: `() -> void` and `(Event, VNode) -> void`. It would be nice to have this type to set as type for arguments like `onClickProc` and `OnKeyUpProc`. Currently, we have to pick the first of the second one depending on the component's content.
 
 Nonetheless, creating webapps with Karax turned out to be very pleasant, as Nim programming in general.
 
